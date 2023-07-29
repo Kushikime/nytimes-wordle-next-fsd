@@ -1,0 +1,73 @@
+.Modal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .bg {
+        width: 100%;
+        height: 100%;
+        background-color: var(--modal-bg-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .container {
+            background-color: var(--modal-content-color);
+            padding: 32px;
+            position: relative;
+            min-height: 500px;
+            min-width: 440px;
+            border-radius: 8px;
+            box-shadow: 0 4px 23px 0 rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--modal-border-color);
+            .modalHeader {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                width: 100%;
+                height: 32px;
+                top: 0;
+                left: 0;
+                position: absolute;
+                .closeModal {
+                    width: 32px;
+                    height: 32px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    span {
+                        width: 10px;
+                        height: 2px;
+                        background-color: transparent;
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                        &::after,
+                        &::before {
+                            content: '';
+                            width: 14px;
+                            height: 2px;
+                            background-color: rgb(220, 220, 220);
+                            position: absolute;
+                        }
+                        &::after {
+                            transform: rotate(45deg);
+                        }
+                        &::before {
+                            transform: rotate(-45deg);
+                        }
+                    }
+                }
+            }
+            .modalContent {
+            }
+        }
+    }
+}
