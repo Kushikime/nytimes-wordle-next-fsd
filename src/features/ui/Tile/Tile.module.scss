@@ -1,0 +1,15 @@
+.Tile {
+    border: 2px solid var(--border-color);
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    font-weight: 700;
+    font-family: 'Franklin';
+    font-size: 1.5rem;
+}
+.active {
+    border-color: var(--border-active-color);
+}

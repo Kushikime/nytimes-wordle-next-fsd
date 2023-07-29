@@ -29,5 +29,15 @@ module.exports = {
         project: './tsconfig.json',
     },
     plugins: ['@typescript-eslint', 'react', 'prettier'],
-    rules: {},
+    rules: {
+        'react/react-in-jsx-scope': 'off',
+        'react/jsx-uses-react': 'off',
+        'prefer-default-export': 'off',
+        'prettier/prettier': ['error', { endOfLine: 'auto' }],
+        'import/prefer-default-export': 'off',
+        'react/function-component-definition': {
+            namedComponents: ['function-expression', 'arrow-function'],
+            unnamedComponents: ['function-expression', 'arrow-function'],
+        },
+    },
 };
