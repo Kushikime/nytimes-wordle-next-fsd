@@ -1,9 +1,15 @@
 .app.dark {
     --bg-color: #121213;
-    --text-color: #ffffff;
+    --text-color: #e9e6e6;
     --border-color: #3a3a3c;
     --border-active-color: #646566;
 
+    --modal-border-color: #1a1a1b;
+
     --key-bg-color: #818384;
     --key-hover-bg-color: #777879;
+
+    --modal-bg-color: rgba(0, 0, 0, 0.5);
+
+    --modal-content-color: #121213;
 }

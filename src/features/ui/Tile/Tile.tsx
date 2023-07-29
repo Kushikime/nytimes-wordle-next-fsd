@@ -1,15 +1,23 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC } from 'react';
 import styles from './Tile.module.scss';
 
-export const Tile: FC<PropsWithChildren> = (props) => {
+interface TileProps {
+    value: string;
+    classNames?: (undefined | string)[];
+}
+
+export const Tile: FC<TileProps> = (props) => {
+    const { value, classNames = [] } = props;
+
     return (
         <div
             className={[
                 styles.Tile,
-                Math.floor(Math.random() * 2) ? styles.active : undefined,
+                value ? styles.active : undefined,
+                ...classNames,
             ].join(' ')}
         >
-            <h3>T</h3>
+            <h3>{value}</h3>
         </div>
     );
 };
