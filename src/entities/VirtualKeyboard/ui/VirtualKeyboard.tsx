@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import styles from './VirtualKeyboard.module.scss';
 import { KeyBoardButton } from '../../../shared/components/KeyBoardButton/KeyBoardButton';
 
@@ -9,14 +9,30 @@ const keys = [
 ];
 
 export const VirtualKeyboard: FC = () => {
+    const [allowInput, setAllowInput] = useState(true);
+
     const onKeyClick = (key: string) => {
-        console.log('key: ', key);
+        if (!allowInput) return;
+        dispatchEvent(new CustomEvent('VKEvent', { detail: { key } }));
     };
+
+    useEffect(() => {
+        window.addEventListener('allowInput', (e: any) => {
+            setAllowInput(e.detail?.allowInput);
+        });
+
+        return () => {
+            window.addEventListener('allowInput', () => {});
+        };
+    }, []);
 
     const mappedKeys = useMemo(
         () =>
             keys.map((row, index) => (
-                <div className={styles.row} key={`VirtualKeyboard_row_${index}`}>
+                <div
+                    className={styles.row}
+                    key={`VirtualKeyboard_row_${index}`}
+                >
                     {row.map((key) => (
                         <KeyBoardButton
                             key={`${index}_${key}`}

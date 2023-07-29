@@ -14,3 +14,21 @@
 .active {
     border-color: var(--border-active-color);
 }
+.contain {
+    background-color: #b59f3b;
+    border-color: #b59f3b;
+}
+.correct {
+    background-color: #538d4e;
+    border-color: #538d4e;
+}
+.wrong {
+    background-color: #3a3a3c;
+    border-color: #3a3a3c;
+}
+
+.small {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+}

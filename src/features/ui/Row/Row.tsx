@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { Tile } from '../Tile/Tile';
 import styles from './Row.module.scss';
 import TileStyles from '../Tile/Tile.module.scss';
@@ -47,11 +47,24 @@ export const Row: FC<RowProps> = (props) => {
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyEvents);
+        if (active) {
+            window.addEventListener('VKEvent', (e: any) => {
+                handleKeyEvents(e.detail);
+                dispatchEvent(new Event('keyup'));
+            });
+        }
 
         return () => {
             window.removeEventListener('keydown', handleKeyEvents);
+            window.removeEventListener('VKEvent', () => {});
         };
     }, [active, allowInput, setAllowInput, currentInput, handleKeyEvents]);
+
+    useEffect(() => {
+        dispatchEvent(
+            new CustomEvent('allowInput', { detail: { allowInput } })
+        );
+    }, [allowInput]);
 
     useEffect(() => {
         window.addEventListener('keyup', () => {
@@ -68,15 +81,15 @@ export const Row: FC<RowProps> = (props) => {
     return (
         <div className={styles.Row}>
             {tiles.map((_, index) => {
-                let classNames: (string | undefined)[] = [];
+                let classNames: (undefined | string)[] = [];
 
                 // show styles only if current row is not active anymore
                 if (!active && currentInput[index]) {
-                    let isLetterInGuess = guess.includes(currentInput[index]);
+                    let isLetterInGuess = guess?.includes(currentInput[index]);
                     let isCorrect = currentInput[index] === guess[index];
 
                     classNames = [
-                        isLetterInGuess ? TileStyles.contain : undefined,
+                        isLetterInGuess ? TileStyles.contain : TileStyles.wrong,
                         isCorrect ? TileStyles.correct : undefined,
                     ];
                 }

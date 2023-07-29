@@ -3,11 +3,11 @@ import styles from './Tile.module.scss';
 
 interface TileProps {
     value: string;
-    classNames: (string | undefined)[];
+    classNames?: (undefined | string)[];
 }
 
 export const Tile: FC<TileProps> = (props) => {
-    const { value, classNames } = props;
+    const { value, classNames = [] } = props;
 
     return (
         <div
