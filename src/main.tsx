@@ -4,7 +4,7 @@ import './shared/styles/index.scss';
 
 const root = createRoot(document.getElementById('root')!);
 
-if (import.meta.env.MODE === 'development') {
+if (process.env.MODE === 'development') {
     // When development, setup the MSW.
     // import the worker (under the browser.ts file)
     import('./tests/mocks/browser')
