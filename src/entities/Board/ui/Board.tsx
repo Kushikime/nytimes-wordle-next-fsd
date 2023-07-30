@@ -50,7 +50,7 @@ export const Board: FC = () => {
     useEffect(() => {
         if (!words.length) {
             (async () => {
-                const fetched = await fetch('/words.json').then((res) =>
+                const fetched = await fetch('/public/words.json').then((res) =>
                     res.json()
                 );
 

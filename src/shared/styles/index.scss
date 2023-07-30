@@ -1,14 +1,14 @@
 @font-face {
     font-family: 'Bevan';
-    src: url('fonts/bevan/Bevan-Regular.ttf');
+    src: url('/public/bevan/Bevan-Regular.ttf');
 }
 @font-face {
     font-family: 'Karnak';
-    src: url('fonts/karnak/karnak.ttf');
+    src: url('/public/karnak/karnak.ttf');
 }
 @font-face {
     font-family: 'Franklin';
-    src: url('fonts/franklin/franklin.ttf');
+    src: url('/public/franklin/franklin.ttf');
 }
 
 @import 'themes/light';
