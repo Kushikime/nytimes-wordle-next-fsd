@@ -19,14 +19,15 @@ export const KeyBoardButton: FC<KeyBoardButtonProps> = (props) => {
     };
 
     return (
-        <div
+        <button
             className={[
                 styles.KeyBoardButton,
                 Math.floor(Math.random() * 2) ? styles.active : undefined,
             ].join(' ')}
             onClick={onClickHandler}
+            type="button"
         >
             <p>{name}</p>
-        </div>
+        </button>
     );
 };

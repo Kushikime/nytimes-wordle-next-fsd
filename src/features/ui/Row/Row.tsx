@@ -17,11 +17,12 @@ export const Row: FC<RowProps> = (props) => {
     const [allowInput, setAllowInput] = useState(true);
 
     const handleKeyEvents = (e: KeyboardEvent) => {
-        let key = e.key;
+        const { key } = e;
 
         if (!active || !allowInput) return;
+        setAllowInput(false);
 
-        if (key === 'Backspace') {
+        if (key === 'Backspace' || key === 'Delete') {
             setCurrentInput(currentInput.slice(0, currentInput.length - 1));
             return;
         }
@@ -33,8 +34,6 @@ export const Row: FC<RowProps> = (props) => {
             }
             return;
         }
-
-        setAllowInput(false);
 
         if (
             currentInput.length < 5 &&
@@ -48,17 +47,18 @@ export const Row: FC<RowProps> = (props) => {
     useEffect(() => {
         window.addEventListener('keydown', handleKeyEvents);
         if (active) {
-            window.addEventListener('VKEvent', (e: any) => {
-                handleKeyEvents(e.detail);
+            window.addEventListener('virtualKeyBoard', (e) => {
+                handleKeyEvents(e.detail as KeyboardEvent);
                 dispatchEvent(new Event('keyup'));
             });
         }
 
         return () => {
             window.removeEventListener('keydown', handleKeyEvents);
-            window.removeEventListener('VKEvent', () => {});
+            window.removeEventListener('virtualKeyBoard', () => {});
         };
-    }, [active, allowInput, setAllowInput, currentInput, handleKeyEvents]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [active, allowInput, setAllowInput, currentInput]);
 
     useEffect(() => {
         dispatchEvent(
@@ -76,17 +76,19 @@ export const Row: FC<RowProps> = (props) => {
         };
     }, [allowInput]);
 
-    const tiles = useMemo(() => Array(5).fill(''), []);
+    const tiles = useMemo(() => [...Array(5).keys()], []);
 
     return (
-        <div className={styles.Row}>
-            {tiles.map((_, index) => {
+        <div className={styles.Row} data-testid="Row">
+            {tiles.map((tile, index) => {
                 let classNames: (undefined | string)[] = [];
 
                 // show styles only if current row is not active anymore
                 if (!active && currentInput[index]) {
-                    let isLetterInGuess = guess?.includes(currentInput[index]);
-                    let isCorrect = currentInput[index] === guess[index];
+                    const isLetterInGuess = guess?.includes(
+                        currentInput[index]
+                    );
+                    const isCorrect = currentInput[index] === guess[index];
 
                     classNames = [
                         isLetterInGuess ? TileStyles.contain : TileStyles.wrong,
@@ -98,7 +100,7 @@ export const Row: FC<RowProps> = (props) => {
                     <Tile
                         classNames={classNames}
                         value={currentInput[index]}
-                        key={`${currentInput[index]}_${index}`}
+                        key={`${currentInput[index]}_${Math.random()}_${tile}`}
                     />
                 );
             })}

@@ -35,9 +35,10 @@ module.exports = {
         'prefer-default-export': 'off',
         'prettier/prettier': ['error', { endOfLine: 'auto' }],
         'import/prefer-default-export': 'off',
-        'react/function-component-definition': {
-            namedComponents: ['function-expression', 'arrow-function'],
-            unnamedComponents: ['function-expression', 'arrow-function'],
-        },
+        'react/function-component-definition': 0,
+        'import/no-extraneous-dependencies': [
+            'error',
+            { devDependencies: true },
+        ],
     },
 };

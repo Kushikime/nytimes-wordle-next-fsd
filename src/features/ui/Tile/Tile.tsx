@@ -3,7 +3,7 @@ import styles from './Tile.module.scss';
 
 interface TileProps {
     value: string;
-    classNames?: (undefined | string)[];
+    classNames: (undefined | string)[];
 }
 
 export const Tile: FC<TileProps> = (props) => {
@@ -11,6 +11,7 @@ export const Tile: FC<TileProps> = (props) => {
 
     return (
         <div
+            data-testid="Tile"
             className={[
                 styles.Tile,
                 value ? styles.active : undefined,
