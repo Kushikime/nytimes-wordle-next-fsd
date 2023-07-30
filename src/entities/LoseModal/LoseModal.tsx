@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { FC } from 'react';
 import { Modal } from '../../shared/components/Modal/Modal';
 import styles from './LoseModal.module.scss';
@@ -11,12 +12,14 @@ interface LoseModalProps {
 export const LoseModal: FC<LoseModalProps> = (props) => {
     const { isVisible, onClose, guess } = props;
     return (
-        <Modal isVisible={isVisible} onClose={onClose}>
+        <Modal isVisible={isVisible} onClose={onClose} testId="LoseModal">
             <h1>You've lost</h1>
             <h2>You didn't guess the Wordle in 6 tries.</h2>
             <p>The correct word was: {guess}</p>
             <div className={styles.actions}>
-                <button onClick={onClose}>RESTART GAME</button>
+                <button onClick={onClose} type="button">
+                    RESTART GAME
+                </button>
             </div>
         </Modal>
     );

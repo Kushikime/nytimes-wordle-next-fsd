@@ -17,7 +17,7 @@ export default defineConfig({
             branches: 80,
             statements: 80,
             exclude: [
-                ...configDefaults.coverage.exclude,
+                ...configDefaults.coverage.exclude!,
                 '**/main.tsx',
                 '**/shared/events',
                 '**/tests',
