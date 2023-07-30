@@ -7,12 +7,13 @@ import { Tile } from '../../features/ui';
 interface StartModalProps {
     isVisible: boolean;
     onClose: () => void;
+    testId: string;
 }
 
 export const StartModal: FC<StartModalProps> = (props) => {
-    const { isVisible, onClose } = props;
+    const { isVisible, onClose, testId } = props;
     return (
-        <Modal isVisible={isVisible} onClose={onClose}>
+        <Modal isVisible={isVisible} onClose={onClose} testId={testId}>
             <h1>How To Play</h1>
             <h2>Guess the Wordle in 6 tries.</h2>
             <ul>
@@ -65,7 +66,9 @@ export const StartModal: FC<StartModalProps> = (props) => {
                 </p>
             </div>
             <div className={styles.actions}>
-                <button onClick={onClose}>START GAME</button>
+                <button onClick={onClose} type="button">
+                    START GAME
+                </button>
             </div>
         </Modal>
     );

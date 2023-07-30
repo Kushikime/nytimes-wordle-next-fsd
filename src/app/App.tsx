@@ -3,7 +3,7 @@ import { Header } from '../widget/Header/ui/Header';
 
 function App() {
     return (
-        <div className={['app', 'dark'].join(' ')}>
+        <div id="app" className={['app', 'dark'].join(' ')}>
             <Header />
             <Game />
         </div>

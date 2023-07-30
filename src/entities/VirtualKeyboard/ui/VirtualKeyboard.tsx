@@ -13,12 +13,12 @@ export const VirtualKeyboard: FC = () => {
 
     const onKeyClick = (key: string) => {
         if (!allowInput) return;
-        dispatchEvent(new CustomEvent('VKEvent', { detail: { key } }));
+        dispatchEvent(new CustomEvent('virtualKeyBoard', { detail: { key } }));
     };
 
     useEffect(() => {
-        window.addEventListener('allowInput', (e: any) => {
-            setAllowInput(e.detail?.allowInput);
+        window.addEventListener('allowInput', (e) => {
+            setAllowInput(e.detail.allow);
         });
 
         return () => {
@@ -28,24 +28,25 @@ export const VirtualKeyboard: FC = () => {
 
     const mappedKeys = useMemo(
         () =>
-            keys.map((row, index) => (
+            keys.map((row) => (
                 <div
                     className={styles.row}
-                    key={`VirtualKeyboard_row_${index}`}
+                    key={`VirtualKeyboard_row_${Math.random()}`}
                 >
                     {row.map((key) => (
                         <KeyBoardButton
-                            key={`${index}_${key}`}
+                            key={`${Math.random()}_${key}`}
                             name={key}
                             onClick={onKeyClick}
                         />
                     ))}
                 </div>
             )),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         []
     );
     return (
-        <div className={styles.VirtualKeyboard}>
+        <div className={styles.VirtualKeyboard} data-testid="VirtualKeyboard">
             <div className={styles.wrapper}>{mappedKeys}</div>
         </div>
     );

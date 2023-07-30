@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Modal.module.scss';
 
 interface ModalProps extends PropsWithChildren {
-    onClose?: () => void;
-    isVisible?: boolean;
+    onClose: () => void;
+    isVisible: boolean;
+    testId: string;
 }
 
 // In most cases this should be not under shared.
@@ -13,12 +14,12 @@ interface ModalProps extends PropsWithChildren {
 // implemented following our design scheme.
 
 export const Modal: FC<ModalProps> = (props) => {
-    const { children, onClose, isVisible } = props;
+    const { children, onClose, isVisible, testId } = props;
 
     return (
         <AnimatePresence>
             {isVisible && (
-                <div className={styles.Modal}>
+                <div className={styles.Modal} data-testid={testId}>
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -34,12 +35,14 @@ export const Modal: FC<ModalProps> = (props) => {
                             transition={{ duration: 0.45 }}
                         >
                             <div className={styles.modalHeader}>
-                                <div
+                                <button
                                     className={styles.closeModal}
                                     onClick={onClose}
+                                    type="button"
+                                    data-testid={`${testId}_close`}
                                 >
-                                    <span></span>
-                                </div>
+                                    <span />
+                                </button>
                             </div>
                             <div className={styles.modalContent}>
                                 {children}
